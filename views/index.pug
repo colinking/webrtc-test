@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  video#video(width="640", height="480", autoplay=true)
+  script.
+    // Grab elements, create settings, etc.
+    var video = document.getElementById('video');
+
+    // Get access to the camera!
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      // Not adding `{ audio: true }` since we only want video now
+      navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+          video.src = window.URL.createObjectURL(stream);
+          video.play();
+      });
+    }
+    //- var localMediaStream;
+    //-
+    //- console.log('here1');
+    //- window.onload = function() {
+    //-   console.log('here2');
+    //-   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    //-   var video = document.getElementById('video');
+    //-   console.log('here3');
+    //-   navigator.getUserMedia({video: true}, function(stream) {
+    //-       console.log('here4');
+    //-       video.src = window.URL.createObjectURL(stream);
+    //-
+    //-       localMediaStream = stream;
+    //-   }, function(err) {
+    //-       if(err) throw err;
+    //-   });
+    //- };
